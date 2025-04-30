@@ -1,0 +1,50 @@
+[
+  {
+    "word": "大",
+    "opposite": "小",
+    "meaning": "ใหญ่ / เล็ก",
+    "level": "HSK1"
+  },
+  {
+    "word": "多",
+    "opposite": "少",
+    "meaning": "มาก / น้อย",
+    "level": "HSK1"
+  },
+  {
+    "word": "上",
+    "opposite": "下",
+    "meaning": "ขึ้น / ลง",
+    "level": "HSK1"
+  },
+  {
+    "word": "来",
+    "opposite": "去",
+    "meaning": "มา / ไป",
+    "level": "HSK1"
+  },
+  {
+    "word": "热",
+    "opposite": "冷",
+    "meaning": "ร้อน / เย็น",
+    "level": "HSK1"
+  },
+  {
+    "word": "快",
+    "opposite": "慢",
+    "meaning": "เร็ว / ช้า",
+    "level": "HSK2"
+  },
+  {
+    "word": "黑",
+    "opposite": "白",
+    "meaning": "ดำ / ขาว",
+    "level": "HSK2"
+  },
+  {
+    "word": "进",
+    "opposite": "出",
+    "meaning": "เข้า / ออก",
+    "level": "HSK2"
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "word": "大",
+    "opposite": "小",
+    "meaning": "ใหญ่ / เล็ก"
+  },
+  {
+    "word": "多",
+    "opposite": "少",
+    "meaning": "มาก / น้อย"
+  },
+  {
+    "word": "上",
+    "opposite": "下",
+    "meaning": "ขึ้น / ลง"
+  },
+  {
+    "word": "来",
+    "opposite": "去",
+    "meaning": "มา / ไป"
+  },
+  {
+    "word": "热",
+    "opposite": "冷",
+    "meaning": "ร้อน / เย็น"
+  }
+]
