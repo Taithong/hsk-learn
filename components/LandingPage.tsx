@@ -13,7 +13,7 @@ export default function LandingPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-8">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold">ยินดีต้อนรับสู่ HSK Learn</h1>
+        <h1 className="text-3xl font-bold">ຍິນດີຕ້ອນຮັບເຂົ້າສູ່ HSK Learn</h1>
         <p className="text-gray-600">เรียนรู้คำศัพท์ภาษาจีนทุกระดับ พร้อมฝึกซ้อมได้ทุกที่</p>
       </div>
 
