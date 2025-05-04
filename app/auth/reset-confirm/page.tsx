@@ -1,57 +1,52 @@
-"use client";
+'use client';
+export const dynamic = 'force-dynamic'; // ป้องกัน prerender error ใน Netlify
+
 import { useEffect, useState } from "react";
 import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ResetConfirmPage() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const oobCode = searchParams.get("oobCode");
-
-  const [newPassword, setNewPassword] = useState("");
-  const [success, setSuccess] = useState(false);
+  const router = useRouter();
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const oobCode = searchParams.get("oobCode");
 
   const handleReset = async () => {
     if (!oobCode) {
-      setError("ลิงก์ไม่ถูกต้องหรือหมดอายุ");
+      setError("ไม่พบรหัสยืนยันในลิงก์");
       return;
     }
-
     try {
-      await confirmPasswordReset(auth, oobCode, newPassword);
-      setSuccess(true);
-      setError("");
-      setTimeout(() => router.push("/auth/login"), 2500);
+      await confirmPasswordReset(auth, oobCode, password);
+      setMessage("รีเซ็ตรหัสผ่านสำเร็จ! กำลังเปลี่ยนเส้นทาง...");
+      setTimeout(() => router.push("/auth/login"), 2000);
     } catch (err: any) {
-      setError("เกิดข้อผิดพลาด: " + err.message);
+      setError(err.message);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 space-y-4">
-      <h2 className="text-xl font-semibold text-center">ตั้งรหัสผ่านใหม่</h2>
-      {success ? (
-        <p className="text-green-600 text-center">ตั้งรหัสผ่านใหม่เรียบร้อย กำลังนำไปหน้าเข้าสู่ระบบ...</p>
-      ) : (
-        <>
-          <input
-            className="w-full border px-3 py-2 rounded"
-            type="password"
-            placeholder="รหัสผ่านใหม่"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <button
-            onClick={handleReset}
-            className="w-full bg-blue-600 text-white py-2 rounded"
-          >
-            ยืนยันรหัสผ่านใหม่
-          </button>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-        </>
-      )}
+    <div className="max-w-md mx-auto p-6 space-y-4">
+      <h2 className="text-xl font-semibold text-center">รีเซ็ตรหัสผ่านใหม่</h2>
+      <input
+        className="w-full border px-3 py-2 rounded"
+        type="password"
+        placeholder="รหัสผ่านใหม่"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button
+        onClick={handleReset}
+        className="w-full bg-blue-600 text-white py-2 rounded"
+      >
+        ยืนยันรีเซ็ต
+      </button>
+      {message && <p className="text-green-600 text-sm text-center">{message}</p>}
+      {error && <p className="text-red-600 text-sm text-center">{error}</p>}
     </div>
   );
 }
