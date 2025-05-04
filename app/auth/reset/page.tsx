@@ -1,33 +1,37 @@
-// app/auth/reset/page.tsx
 "use client";
 import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
-export default function ResetPasswordPage() {
+export default function ResetPage() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleReset = async () => {
+    setError("");
+    setStatus("");
+
     try {
-      await sendPasswordResetEmail(auth, email, {
-        url: "http://localhost:3000/auth/reset-confirm", // เปลี่ยนเป็นโดเมนจริงหาก deploy แล้ว
-      });
-      setMessage("ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปที่อีเมลของคุณแล้ว");
-      setError("");
+      const actionCodeSettings = {
+        url: "https://hsklearn.netlify.app/auth/reset-confirm", // เปลี่ยนเป็น production domain เมื่อเผยแพร่
+        handleCodeInApp: true,
+      };
+      await sendPasswordResetEmail(auth, email, actionCodeSettings);
+      router.push("/auth/reset-confirm");
     } catch (err: any) {
       setError(err.message);
-      setMessage("");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto space-y-4 p-6">
+    <div className="max-w-md mx-auto p-6 space-y-4">
       <h2 className="text-xl font-semibold text-center">ลืมรหัสผ่าน</h2>
       <input
         className="w-full border px-3 py-2 rounded"
-        placeholder="กรอกอีเมล"
+        placeholder="อีเมลของคุณ"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -37,7 +41,6 @@ export default function ResetPasswordPage() {
       >
         ส่งลิงก์รีเซ็ตรหัสผ่าน
       </button>
-      {message && <p className="text-green-600 text-sm">{message}</p>}
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
