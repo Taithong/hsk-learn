@@ -1,5 +1,6 @@
-import HSKMenu from '@/components/HSKMenu';
+import hsk2 from '@/data/hsk2.json';
+import WordRandomizer from '@/components/WordRandomizer';
 
-export default function HSK2MenuPage() {
-  return <HSKMenu level="hsk2" title="HSK2" description="เรียนภาษาจีนระดับ HSK2" />;
+export default function HSK2RandomPage() {
+  return <WordRandomizer data={hsk2} title="สุ่มคำศัพท์ HSK2" level="HSK2" />;
 }
